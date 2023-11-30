@@ -71,6 +71,10 @@ StatusChoices = [(e.value, e.name) for e in Status]
 REVERSE_ASSET_TYPE = reverse_choices(AssetTypeChoices)
 REVERSE_STATUS = reverse_choices(StatusChoices)
 
+# class AssetWaitingUser(BaseModel):
+#     asset = models.ForeignKey("Asset", on_delete=models.CASCADE, null=True, blank=True)
+#     user = models.ForeignKey("User", on_delete=models.CASCADE, null=True, blank=True)
+
 
 class Asset(BaseModel):
     name = models.CharField(max_length=1024, blank=False, null=False)
@@ -120,11 +124,11 @@ class Asset(BaseModel):
         on_delete=models.PROTECT,
         default=None,
         null=True,
-        to_field="username"
+        to_field="username",
     )
 
     # list of Foreign keys of users waiting for the asset
-    waiting_users = models.ManyToManyField(User, related_name="waitingUsers")
+    # waiting_users = models.ManyToManyField(User, related_name="waitingUsers")
     CSV_MAPPING = {
         "name": "Name",
         "description": "Description",

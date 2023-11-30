@@ -28,7 +28,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import UUIDField
 from rest_framework.viewsets import GenericViewSet
 
-from care.facility.api.serializers.asset import (
+from care.facility.api.serializers.asset import (  # AssetWaitingUserSerializer,
     AssetAvailabilitySerializer,
     AssetLocationSerializer,
     AssetSerializer,
@@ -38,7 +38,7 @@ from care.facility.api.serializers.asset import (
     DummyAssetOperateSerializer,
     UserDefaultAssetLocationSerializer,
 )
-from care.facility.models import (
+from care.facility.models import (  # AssetWaitingUser,
     Asset,
     AssetAvailabilityRecord,
     AssetLocation,
@@ -214,6 +214,19 @@ class AssetAvailabilityViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSe
     serializer_class = AssetAvailabilitySerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = AssetAvailabilityFilter
+
+
+# class AssetWaitingUserViewSet(ListModelMixin, RetrieveModelMixin, CreateModelMixin, DestroyModelMixin, UpdateModelMixin, GenericViewSet):
+#     queryset = AssetWaitingUser.objects.all()
+#     serializer_class = AssetWaitingUserSerializer
+#     lookup_field = "external_id"
+#     permission_classes = [IsAuthenticated]
+#     # filter_backends = (filters.DjangoFilterBackend, drf_filters.SearchFilter)
+#     # search_fields = ["name", "serial_number", "qr_code_id"]
+#     # filterset_class = AssetFilter
+
+#     def get_queryset(self):
+#         return AssetWaitingUser.objects.filter(asset__id = self.request.id)
 
 
 class AssetViewSet(

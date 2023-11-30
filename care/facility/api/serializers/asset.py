@@ -17,7 +17,7 @@ from rest_framework.validators import UniqueValidator
 
 from care.facility.api.serializers import TIMESTAMP_FIELDS
 from care.facility.api.serializers.facility import FacilityBareMinimumSerializer
-from care.facility.models.asset import (
+from care.facility.models.asset import (  # AssetWaitingUser,
     Asset,
     AssetAvailabilityRecord,
     AssetLocation,
@@ -121,6 +121,15 @@ class AssetServiceSerializer(ModelSerializer):
             updated_instance = super().update(instance, validated_data)
 
         return updated_instance
+
+
+# class AssetWaitingUserSerializer(ModelSerializer):
+#     id = UUIDField(source='external_id', read_only=True)
+#     waiting_users = UserBaseMinimumSerializer(many=True, read_only=True)
+
+#     class Meta:
+#         model = AssetWaitingUser
+#         fields = ('waiting_users','id')
 
 
 class AssetSerializer(ModelSerializer):
